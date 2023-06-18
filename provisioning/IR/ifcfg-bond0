@@ -10,4 +10,4 @@ ONBOOT=yes
 USERCTL=no
 NM_CONTROLLED=no
 BOOTPROTO=none
-BONDING_OPTS="mode=balance-xor xmit_hash_policy=layer2+3 lacp_rate=1 miimon=100 fail_over_mac=1"
+BONDING_OPTS="mode=1 miimon=100 fail_over_mac=1"
