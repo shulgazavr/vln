@@ -1,0 +1,42 @@
+- hosts: R1
+  become: yes
+  tasks:
+  
+  - name: Add epel-release repo
+    yum:
+      name: epel-release
+      state: present
+        
+  - name: Add iptables service
+    yum:
+      name: iptables-services
+      state: present
+        
+  - name: edit sysctl ip_forward
+    sysctl:
+      name: net.ipv4.ip_forward
+      value: '1'
+      sysctl_set: yes
+      state: present
+      reload: yes
+
+  - name: copy eth0 conf files
+    copy: 
+      src: R1/ifcfg-eth0
+      dest: /etc/sysconfig/network-scripts/
+
+  - name: copy eth1 conf files
+    copy: 
+      src: R1/ifcfg-eth1
+      dest: /etc/sysconfig/network-scripts/
+
+  - name: copy vlan101 conf files
+    copy: 
+      src: R1/ifcfg-vlan101
+      dest: /etc/sysconfig/network-scripts/
+
+  - name: restart network
+    service:
+      name: network
+      state: restarted
+      

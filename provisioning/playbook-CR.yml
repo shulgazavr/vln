@@ -1,0 +1,65 @@
+- hosts: CR 
+  become: yes
+  tasks:
+
+  - name: Add epel-release repo
+    yum:
+      name: epel-release
+      state: present
+        
+  - name: Add iptables service
+    yum:
+      name: iptables-services
+      state: present
+        
+  - name: edit sysctl ip_forward
+    sysctl:
+      name: net.ipv4.ip_forward
+      value: '1'
+      sysctl_set: yes
+      state: present
+      reload: yes
+
+# copy files
+  - name: copy eth0 conf files
+    copy: 
+      src: CR/ifcfg-eth0
+      dest: /etc/sysconfig/network-scripts/
+
+  - name: copy eth1 conf files
+    copy: 
+      src: CR/ifcfg-eth1
+      dest: /etc/sysconfig/network-scripts/
+
+  - name: copy eth2 conf files
+    copy: 
+      src: CR/ifcfg-eth2
+      dest: /etc/sysconfig/network-scripts/
+
+  - name: copy eth3 conf files
+    copy: 
+      src: CR/ifcfg-eth3
+      dest: /etc/sysconfig/network-scripts/
+
+  - name: copy eth4 conf files
+    copy: 
+      src: CR/ifcfg-eth4
+      dest: /etc/sysconfig/network-scripts/
+
+  - name: copy bond0 conf files
+    copy: 
+      src: CR/ifcfg-bond0
+      dest: /etc/sysconfig/network-scripts/
+
+  - name: copy iptables file
+    copy: 
+      src: CR/iptables
+      dest: /etc/sysconfig/
+
+  - name: add iptables rule
+    shell: iptables-restore < /etc/sysconfig/iptables
+
+  - name: restart network
+    service:
+      name: network
+      state: restarted

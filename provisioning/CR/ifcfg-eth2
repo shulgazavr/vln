@@ -1,0 +1,10 @@
+DEVICE=eth2
+NAME=bond0-eth2
+TYPE=Ethernet
+MTU=9000
+BOOTPROTO=none
+ONBOOT=yes
+MASTER=bond0
+SLAVE=yes
+USERCTL=no
+NM_CONTROLLED=no

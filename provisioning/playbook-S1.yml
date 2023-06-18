@@ -1,0 +1,19 @@
+- hosts: S1 
+  become: yes
+  tasks:
+
+  - name: copy eth0 conf files
+    copy: 
+      src: S1/ifcfg-eth0
+      dest: /etc/sysconfig/network-scripts/
+
+  - name: copy vlan101 conf files
+    copy: 
+      src: S1/ifcfg-vlan101
+      dest: /etc/sysconfig/network-scripts/
+
+  - name: restart network
+    service:
+      name: network
+      state: restarted
+      

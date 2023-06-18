@@ -1,0 +1,15 @@
+DEVICE=bond0
+NAME=bond0
+TYPE=Bond
+BONDING_MASTER=yes
+IPADDR=192.168.100.2
+NETMASK=255.255.255.0
+GATEWAY=192.168.100.1
+DEFROUTE=yes
+IPV6INIT=no
+MTU=9000
+ONBOOT=yes
+USERCTL=no
+NM_CONTROLLED=no
+BOOTPROTO=none
+BONDING_OPTS="mode=balance-xor xmit_hash_policy=layer2+3 lacp_rate=1 miimon=100 fail_over_mac=1"
